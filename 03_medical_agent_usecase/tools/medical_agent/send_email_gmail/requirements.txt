@@ -1,5 +1,5 @@
-ibm-watsonx-orchestrate
 google-auth
 google-auth-oauthlib
 google-auth-httplib2
 google-api-python-client
+requests==2.32.3
