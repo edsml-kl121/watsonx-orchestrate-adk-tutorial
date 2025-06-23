@@ -4,7 +4,7 @@ set -x
 orchestrate env activate test-env
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-for python_tool in hr_agent/get_my_policies.py; do
+for python_tool in hr_agent/get_my_policies_RAG.py; do
   orchestrate tools import -k python -f ${SCRIPT_DIR}/tools/${python_tool} -r ${SCRIPT_DIR}/tools/requirements.txt
 done
 
