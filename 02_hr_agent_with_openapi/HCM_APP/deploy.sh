@@ -1,0 +1,1 @@
+ibmcloud ce application create --name hr-skills --cpu 1 --memory 4G --min-scale 1 --max-scale 1 --port 3002 --registry-secret nicole-registry-4 --image us.icr.io/cc-6920005y08-xtkrbmqm-cr/hr-skills --env-from-secret env-nicole-1

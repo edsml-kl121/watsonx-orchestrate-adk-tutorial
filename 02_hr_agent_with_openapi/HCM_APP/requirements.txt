@@ -1,0 +1,8 @@
+fastapi
+pydantic
+uvicorn
+ibm_watson_machine_learning
+dotenv
+openpyxl
+pandas
+faker
