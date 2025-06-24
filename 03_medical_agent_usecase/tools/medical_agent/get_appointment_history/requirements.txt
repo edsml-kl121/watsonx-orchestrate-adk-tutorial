@@ -1,4 +1,4 @@
-ibm-watsonx-orchestrate
+requests==2.32.3
 google-auth
 google-auth-oauthlib
 google-auth-httplib2

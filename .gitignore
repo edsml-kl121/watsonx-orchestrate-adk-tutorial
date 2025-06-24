@@ -1,5 +1,7 @@
 .env
 **env/
+venv/
 __pycache__/
 **database.db
-venv/
+**credentials.json
+token.json
