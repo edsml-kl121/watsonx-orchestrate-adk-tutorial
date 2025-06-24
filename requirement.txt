@@ -1,2 +1,3 @@
 ibm-watsonx-orchestrate
 ibm-watsonx-ai
+python-dotenv
