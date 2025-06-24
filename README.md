@@ -2,7 +2,7 @@ Install and create a virtual environment from `requirement.txt`
 
 ```
 python -m venv venv
-source venv/bin/acitvate
+source venv/bin/activate
 uv pip install -r requirement.txt
 ```
 
