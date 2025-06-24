@@ -4,37 +4,39 @@ from ibm_watsonx_orchestrate.agent_builder.tools import tool
 from ibm_watsonx_ai.foundation_models.utils import Toolkit
 from ibm_watsonx_ai import APIClient, Credentials
 
-load_dotenv()
 
 # Get absolute path to `.env` in the same directory as this script
 env_path = os.path.join(os.path.dirname(__file__), ".env")
 load_dotenv(dotenv_path=env_path)
 
-# Load and validate environment variables
+try:
+    # Load and validate environment variables
 
-# vector_index for HR Thai leave policies
-vector_index_id = os.getenv("WATSONX_VECTOR_INDEX_ID")
-# Replace with your actual project ID and credentials
-project_id = os.getenv("WATSONX_PROJECT_ID")
-# the URL for the IBM Watsonx studio machine learning instance
-watsonx_url = os.getenv("WATSONX_URL")
-# get them from your IBM Cloud account (IAM API keys)
-watsonx_api_key = os.getenv("WATSONX_API_KEY")
+    # vector_index for HR Thai leave policies make sure it exists in the same project_id
+    vector_index_id = os.getenv("WATSONX_VECTOR_INDEX_ID")
+    # Replace with your actual project ID and credentials
+    project_id = os.getenv("WATSONX_PROJECT_ID")
+    # the URL for the IBM Watsonx studio machine learning instance
+    watsonx_url = os.getenv("WATSONX_URL")
+    # get them from your IBM Cloud account (IAM API keys)
+    watsonx_api_key = os.getenv("WATSONX_API_KEY")
+    if not vector_index_id:
+        raise EnvironmentError("❌ WATSONX_VECTOR_INDEX_ID environment variable not found")
+    if not project_id:
+        raise EnvironmentError("❌ WATSONX_PROJECT_ID environment variable not found")
+    if not watsonx_url:
+        raise EnvironmentError("❌ WATSONX_URL environment variable not found")
+    if not watsonx_api_key:
+        raise EnvironmentError("❌ WATSONX_API_KEY environment variable not found")
+    
+    credentials = Credentials(
+        url=watsonx_url,
+        api_key=watsonx_api_key,
+    )
+except EnvironmentError as e:
+    raise RuntimeError(f"Environment variable error: {e}")
 
-if not vector_index_id:
-    raise EnvironmentError("❌ WATSONX_VECTOR_INDEX_ID environment variable not found")
-if not project_id:
-    raise EnvironmentError("❌ WATSONX_PROJECT_ID environment variable not found")
-if not watsonx_url:
-    raise EnvironmentError("❌ WATSONX_URL environment variable not found")
-if not watsonx_api_key:
-    raise EnvironmentError("❌ WATSONX_API_KEY environment variable not found")
 
-
-credentials = Credentials(
-    url=watsonx_url,
-    api_key=watsonx_api_key,
-)
 
 def proximity_search(query: str) -> str:
     try:
@@ -81,4 +83,18 @@ def get_my_policies_rag(user_query: str = None) -> str:
 
         return proximity_search(user_query)
     except Exception as e:
-        raise RuntimeError(f"Failed to retrieve HR policy content: {e}")
+        return RuntimeError(f"Failed to retrieve HR policy content: {e}")
+        
+
+
+# Example usage
+# This is for testing purposes and can be removed in production code.
+"""if __name__ == "__main__":
+    try:
+        # Change the query below to test different topics
+        test_query = "leave types"
+        result = get_my_policies_rag(test_query)
+        print("Query:", test_query)
+        print("Result:", result)
+    except Exception as e:
+        print("Error:", e)"""

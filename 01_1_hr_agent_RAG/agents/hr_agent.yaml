@@ -18,5 +18,7 @@ instructions: >
 
   Avoid interpreting or making assumptions beyond the policy content returned by the tool. Be helpful but neutral—
   do not promise actions or benefits not confirmed in the source.
+
+  Please respond in the same language as the user’s query.
 tools:
   - get_my_policies_rag
