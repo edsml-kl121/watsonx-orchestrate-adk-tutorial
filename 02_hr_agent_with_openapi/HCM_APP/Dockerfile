@@ -21,8 +21,8 @@ WORKDIR /src
 COPY . /src
 RUN chmod -R 777 /src
 
-# Use uv to install dependencies
-RUN uv pip install -r requirements.txt
+# Use uv to install dependencies with --system flag
+RUN uv pip install --system -r requirements.txt
 
 # Expose FastAPI port
 EXPOSE 3002

@@ -1,0 +1,889 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "HR Automation",
+        "description": "API for retrieving employee details and updating profile information",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://hcm-app.1soswfjkmeox.us-south.codeengine.appdomain.cloud",
+            "description": "Production server"
+        }
+    ],
+    "tags": [],
+    "paths": {
+        "/create-expense-claim": {
+            "post": {
+                "summary": "SY_Create an expense claim",
+                "description": "Creates a new expense claim for the given user",
+                "requestBody": {
+                    "description": "The expense claim request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExpenseClaimRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Expense claim created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExpenseClaimRequest"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "error": "Not Found",
+                                    "detail": "User not found",
+                                    "status_code": 404
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user_profile_details": {
+            "post": {
+                "summary": "SY_Get User Profile",
+                "description": "  \nGet complete profile data of user. \n\n:param name: The user's name\n:returns: The user's profile data, which includes address, user ID, name, time off balance, and title.\n\nIf the response is empty, the queried username does not exist, so you should request the user to provide the username.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "title": "Name",
+                                        "description": "The unique identifier of the user."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "address": {
+                                            "type": "string"
+                                        },
+                                        "time_off_balance": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status_code": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Not Found",
+                                    "message": "User not found",
+                                    "status_code": 404
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        },
+        "/get_emails": {
+            "post": {
+                "summary": "SY_Get  emails for a user",
+                "description": "Get emails for a user. If the response is empty, the queried username does not exist, so you should request the user to provide the username.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Emails for the user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Email"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status_code": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Not Found",
+                                    "message": "User not found",
+                                    "status_code": 404
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        },
+        "/get_corporate_card_transactions": {
+            "post": {
+                "summary": "Get corporate card transactions for a user",
+                "description": "Get corporate card transactions for a user. If the response is empty, the queried username does not exist, so you should request the user to provide the username.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Corporate card transactions for the user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Transaction"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status_code": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Not Found",
+                                    "message": "User not found",
+                                    "status_code": 404
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        },
+        "/time-off-balance": {
+            "post": {
+                "summary": "SY_Get Time Off Balance",
+                "description": "Get time off balance data. \n\n:param name: The user's name\n:returns: User's time off balance as a single string\n\nIf the response is empty, the queried username does not exist, so you should request the user to provide the username.\n",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "title": "Name",
+                                        "description": "The name of the user."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Remaining time-off balance as a single string."
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status_code": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Not Found",
+                                    "message": "User not found",
+                                    "status_code": 404
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        },
+        "/request-time-off": {
+            "post": {
+                "summary": "Request Time Off",
+                "description": "\nRequest time off, apply for leaves. \n\n:param name: The name of the user (ask user for it, if you are unsure).\n:param from_date: Start date of time off, represented as a string in date format, e.g. 2025-05-22\n:param to_date: End date of time off, represented as a string in date format, e.g. 2025-05-27\n:returns: A confirmation message\n\nIf the response is empty, the queried username does not exist, so you should request the user to provide the username.",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Confirmation message as a single string."
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status_code": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Not Found",
+                                    "message": "User not found",
+                                    "status_code": 404
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TimeOffRequest"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/update-title": {
+            "put": {
+                "summary": "SY_Update Title",
+                "description": "\nUpdate user's title. \n\n:param name: User's name\n:param new_title: User's new title\n:returns: A confirmation message as a single string\n\nIf the response is empty, the queried username does not exist, so you should request the user to provide the username.\n",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Confirmation message as a single string."
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status_code": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Not Found",
+                                    "message": "User not found",
+                                    "status_code": 404
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTitleRequest"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/update-address": {
+            "put": {
+                "summary": "SY_Update Address",
+                "description": "\nUpdate user's address. \n\n:param name: User's name\n:param new_address: User's new address\n:returns: A confirmation message\n\nIf the response is empty, the queried username does not exist, so you should request the user to provide the username.",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Confirmation message as a single string."
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status_code": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Not Found",
+                                    "message": "User not found",
+                                    "status_code": 404
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateAddressRequest"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/create-user": {
+            "post": {
+                "summary": "SY_Create User",
+                "description": "create a user",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Confirmation message including user ID as a single string."
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserRequest"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateUserRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Full name of the user."
+                    },
+                    "time_off_balance": {
+                        "type": "integer",
+                        "description": "Initial time-off balance in days."
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Job title of the user."
+                    },
+                    "address": {
+                        "type": "string",
+                        "description": "Address of the user."
+                    }
+                },
+                "required": [
+                    "name",
+                    "time_off_balance",
+                    "title",
+                    "address"
+                ],
+                "title": "CreateUserRequest"
+            },
+            "Email": {
+                "type": "object",
+                "properties": {
+                    "Subject": {
+                        "type": "string"
+                    },
+                    "Content": {
+                        "type": "string"
+                    },
+                    "Name": {
+                        "type": "string"
+                    },
+                    "Sender": {
+                        "type": "string"
+                    },
+                    "Recipient": {
+                        "type": "string"
+                    },
+                    "Thread_ID": {
+                        "type": "string"
+                    },
+                    "Thread_Index": {
+                        "type": "string"
+                    },
+                    "Attachments": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "Timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "ErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "The error message"
+                    },
+                    "detail": {
+                        "type": "string",
+                        "description": "The error detail"
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "description": "The HTTP status code"
+                    }
+                }
+            },
+            "Transaction": {
+                "type": "object",
+                "properties": {
+                    "Expense Type": {
+                        "type": "string"
+                    },
+                    "Supplier Details": {
+                        "type": "string"
+                    },
+                    "Date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "Amount": {
+                        "type": "string"
+                    },
+                    "Employee Name": {
+                        "type": "string"
+                    },
+                    "Transaction ID": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "HTTPValidationError": {
+                "type": "object",
+                "properties": {
+                    "detail": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "description": "List of validation errors.",
+                        "title": "Detail"
+                    }
+                },
+                "title": "HTTPValidationError"
+            },
+            "TimeOffRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the user."
+                    },
+                    "from_date": {
+                        "type": "string",
+                        "description": "Start date of the time-off request (YYYY-MM-DD).",
+                        "format": "date"
+                    },
+                    "to_date": {
+                        "type": "string",
+                        "description": "End date of the time-off request (YYYY-MM-DD).",
+                        "format": "date"
+                    }
+                },
+                "required": [
+                    "name",
+                    "from_date",
+                    "to_date"
+                ],
+                "title": "TimeOffRequest"
+            },
+            "UpdateAddressRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the user."
+                    },
+                    "new_address": {
+                        "type": "string",
+                        "description": "The updated address of the user."
+                    }
+                },
+                "required": [
+                    "name",
+                    "new_address"
+                ],
+                "title": "UpdateAddressRequest"
+            },
+            "UpdateTitleRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the user."
+                    },
+                    "new_title": {
+                        "type": "string",
+                        "description": "The updated job title of the user."
+                    }
+                },
+                "required": [
+                    "name",
+                    "new_title"
+                ],
+                "title": "UpdateTitleRequest"
+            },
+            "ValidationError": {
+                "type": "object",
+                "properties": {
+                    "loc": {
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "description": "The location of the error in the request."
+                    },
+                    "msg": {
+                        "type": "string",
+                        "description": "A message describing the error."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of error."
+                    }
+                },
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            },
+            "ExpenseEntry": {
+                "type": "object",
+                "properties": {
+                    "transaction_id": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "The ID of the transaction"
+                    },
+                    "supplier": {
+                        "type": "string",
+                        "description": "The supplier of the transaction"
+                    },
+                    "transaction_date": {
+                        "type": "string",
+                        "description": "The date of the transaction"
+                    },
+                    "transaction_amount": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "The amount of the transaction"
+                    },
+                    "receipt_file": {
+                        "type": "string",
+                        "description": "The file containing the receipt"
+                    },
+                    "transaction_type": {
+                        "type": "string",
+                        "description": "The type of the transaction"
+                    },
+                    "payment_method": {
+                        "type": "string",
+                        "description": "The method of payment"
+                    }
+                },
+                "required": [
+                    "supplier",
+                    "transaction_date",
+                    "transaction_amount",
+                    "receipt_file",
+                    "transaction_type",
+                    "payment_method"
+                ]
+            },
+            "ExpenseClaimRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the user"
+                    },
+                    "sustainable_travel_incentive": {
+                        "type": "boolean",
+                        "description": "Whether the claim is for sustainable travel incentive"
+                    },
+                    "expense_report": {
+                        "type": "string",
+                        "description": "The stringified list of dictionaries of expense entry with the keys supplier, transaction_date, transaction_amount, receipt_file, transaction_type, payment_method"
+                    }
+                },
+                "required": [
+                    "name",
+                    "sustainable_travel_incentive",
+                    "expense_report"
+                ]
+            }
+        }
+    }
+}
