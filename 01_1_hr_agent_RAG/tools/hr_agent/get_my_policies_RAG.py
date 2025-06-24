@@ -6,40 +6,58 @@ from ibm_watsonx_ai import APIClient, Credentials
 
 load_dotenv()
 
-# First define the vector index ID, project ID, and credentials.
-# These are used to connect to the IBM Watsonx AI service and access the vector index.
+# Get absolute path to `.env` in the same directory as this script
+env_path = os.path.join(os.path.dirname(__file__), ".env")
+load_dotenv(dotenv_path=env_path)
+
+# Load and validate environment variables
 
 # vector_index for HR Thai leave policies
 vector_index_id = os.getenv("WATSONX_VECTOR_INDEX_ID")
 # Replace with your actual project ID and credentials
 project_id = os.getenv("WATSONX_PROJECT_ID")
+# the URL for the IBM Watsonx studio machine learning instance
+watsonx_url = os.getenv("WATSONX_URL")
+# get them from your IBM Cloud account (IAM API keys)
+watsonx_api_key = os.getenv("WATSONX_API_KEY")
+
+if not vector_index_id:
+    raise EnvironmentError("❌ WATSONX_VECTOR_INDEX_ID environment variable not found")
+if not project_id:
+    raise EnvironmentError("❌ WATSONX_PROJECT_ID environment variable not found")
+if not watsonx_url:
+    raise EnvironmentError("❌ WATSONX_URL environment variable not found")
+if not watsonx_api_key:
+    raise EnvironmentError("❌ WATSONX_API_KEY environment variable not found")
+
 
 credentials = Credentials(
-    # the URL for the IBM Watsonx studio machine learning instance
-    url=os.getenv("WATSONX_URL"),
-    # get them from your IBM Cloud account (IAM API keys)
-    api_key=os.getenv("WATSONX_API_KEY"),
+    url=watsonx_url,
+    api_key=watsonx_api_key,
 )
 
 def proximity_search(query: str) -> str:
-    api_client = APIClient(
-        project_id=project_id,
-        credentials=credentials,
-    )
+    try:
+        api_client = APIClient(
+            project_id=project_id,
+            credentials=credentials,
+        )
 
-    document_search_tool = Toolkit(api_client).get_tool("RAGQuery")
+        document_search_tool = Toolkit(api_client).get_tool("RAGQuery")
 
-    config = {
-        "vectorIndexId": vector_index_id,
-        "projectId": project_id
-    }
+        config = {
+            "vectorIndexId": vector_index_id,
+            "projectId": project_id
+        }
 
-    results = document_search_tool.run(
-        input=query,
-        config=config
-    )
+        results = document_search_tool.run(
+            input=query,
+            config=config
+        )
 
-    return results.get("output")
+        return results.get("output")
+    except Exception as e:
+        raise RuntimeError(f"Error during RAG proximity search: {e}")
 
 @tool
 def get_my_policies_rag(user_query: str = None) -> str:
@@ -57,23 +75,10 @@ def get_my_policies_rag(user_query: str = None) -> str:
 
     :returns: A plain-text string containing one or more relevant policy excerpts. These may include bullet points, guidelines, eligibility rules, or approval steps. The output is not formatted or curated, and is intended solely as contextual input for the LLM agent.
     """
-    # Validate user query
-    if not user_query:
-        return "Please provide a specific policy topic, e.g., 'maternity leave' or 'unpaid leave'."
+    try:
+        if not user_query:
+            return "Please provide a specific policy topic, e.g., 'maternity leave' or 'unpaid leave'."
 
-    return proximity_search(user_query)
-
-
-# get_my_policies_rag-tool docstring
-    # """
-    # Retrieves relevant HR policy content from a vector index using a Retrieval-Augmented Generation (RAG) search.
-
-    # This tool accepts a refined query (e.g., "maternity leave") and returns matching content from company policy documents.
-    # It is intended to provide unformatted grounding text for use by the agent's language model, which will handle summarization,
-    # markdown formatting, and final response generation.
-
-    # :param user_query: A focused HR policy topic interpreted by the agent (e.g., "parental leave", "unpaid leave", "leave types", "leave frequency", "maternity policy").
-
-    # :returns: A plain-text string containing relevant policy content. This may include lists, entitlements, leave types,
-    #           or approval requirements. The output is unstructured and intended for downstream formatting by the agent.
-    # """
+        return proximity_search(user_query)
+    except Exception as e:
+        raise RuntimeError(f"Failed to retrieve HR policy content: {e}")
