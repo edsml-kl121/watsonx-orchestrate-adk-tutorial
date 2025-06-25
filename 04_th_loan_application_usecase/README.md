@@ -6,7 +6,7 @@
 
 ### Locating to single agent
 
-Please locate to the `agents/medical_agent.yaml` and `agents/diabetes_agent.yaml` change the name of the agent so it does not override the old agent.
+Please locate to the `agents/loan_agent.yaml` and `agents/loan_knowledge_agent.yaml` change the name of the agent so it does not override the old agent.
 ```
 cd single_agent
 bash import-all.sh
@@ -14,7 +14,7 @@ bash import-all.sh
 
 ### Locating to multi agent
 
-Please locate to the `agents/medical_agent.yaml` and `agents/diabetes_agent.yaml` change the name of the agent so it does not override the old agent.
+Please locate to the `agents/loan_agent.yaml` and `agents/loan_knowledge_agent.yaml` change the name of the agent so it does not override the old agent.
 ```
 cd single_agent
 bash import-all.sh
