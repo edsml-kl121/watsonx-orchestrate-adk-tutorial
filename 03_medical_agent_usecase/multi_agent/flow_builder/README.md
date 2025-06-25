@@ -1,0 +1,1 @@
+Please use the health checkup decision tool to accept age and BMI to make health plan decision. Please reply in same language as user query.

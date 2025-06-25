@@ -158,10 +158,10 @@ def export_users():
     # Convert to DataFrame for Excel export
     df = pd.DataFrame(users)
 
-    file_path = "users_data.xlsx"
+    file_path = "users_data_exported.xlsx"
     df.to_excel(file_path, index=False)
 
-    return FileResponse(file_path, filename="users_data.xlsx", media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    return FileResponse(file_path, filename="users_data_exported.xlsx", media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
 @app.delete("/clear-users/")
 def clear_users():

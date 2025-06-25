@@ -1,4 +1,9 @@
 .env
 **env/
+venv/
 __pycache__/
 **database.db
+**credentials.json
+token.json
+CLI/
+import-all-admin.sh
