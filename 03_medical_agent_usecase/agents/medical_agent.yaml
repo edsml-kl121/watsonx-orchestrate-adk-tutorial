@@ -1,6 +1,6 @@
 spec_version: v1
 style: react
-name: hospital_appointment_agent_mew_v2
+name: hospital_appointment_agent_earth_v1
 llm: watsonx/meta-llama/llama-3-3-70b-instruct
 description: >
   This assistant is designed to support hospital staff and healthcare systems in managing patient appointments efficiently.
