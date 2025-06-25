@@ -1,0 +1,206 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Thai Health Checkup Decision API",
+      "description": "Thai API that takes BMI and age to determine optimal health checkup plan and doctor assignment",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://agentlab-th.1u1bpgsnsvuw.us-south.codeengine.appdomain.cloud",
+        "description": "Development server"
+      }
+    ],
+    "paths": {
+      "/checkup": {
+        "post": {
+          "summary": "Health Checkup Decision",
+          "description": "API that takes patient BMI and age to determine the appropriate health checkup plan and doctor assignment with Thai language response",
+          "operationId": "healthCheckupDecision",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckupRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful execution",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CheckupResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request - Invalid BMI or age values",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "type": "string",
+                        "description": "Error message describing the validation issue."
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "type": "string",
+                        "description": "Error message."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/test": {
+        "get": {
+          "summary": "Test Cases",
+          "description": "Get example test cases showing different decision scenarios",
+          "operationId": "getTestCases",
+          "responses": {
+            "200": {
+              "description": "Test cases with expected results",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TestResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/": {
+        "get": {
+          "summary": "API Information",
+          "description": "Get basic information about the Health Checkup Decision API",
+          "operationId": "getApiInfo",
+          "responses": {
+            "200": {
+              "description": "API information and available endpoints",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "endpoints": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "CheckupRequest": {
+          "type": "object",
+          "properties": {
+            "bmi": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Body Mass Index (BMI) of the patient",
+              "example": 25.5
+            },
+            "age": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 200,
+              "description": "Age of the patient in years",
+              "example": 35
+            }
+          },
+          "required": ["bmi", "age"]
+        },
+        "CheckupResponse": {
+          "type": "object",
+          "properties": {
+            "decision": {
+              "type": "string",
+              "description": "Health checkup plan decision",
+              "example": "Check up plan B"
+            },
+            "plan": {
+              "type": "string",
+              "enum": ["A", "B", "C", "D"],
+              "description": "Assigned checkup plan (A, B, C, or D)",
+              "example": "B"
+            },
+            "doctor": {
+              "type": "string",
+              "enum": ["A", "B", "C", "D"],
+              "description": "Assigned doctor (A, B, C, or D)",
+              "example": "B"
+            },
+            "thai_message": {
+              "type": "string",
+              "description": "Complete recommendation message in Thai language",
+              "example": "แนะนำให้ส่งผู้ป่วยตรวจสุขภาพตาม แผนตรวจสุขภาพ B และเข้าพบ แพทย์ B ค่ะ"
+            }
+          },
+          "required": ["decision", "plan", "doctor", "thai_message"]
+        },
+        "TestResponse": {
+          "type": "object",
+          "properties": {
+            "test_results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "input": {
+                    "type": "string",
+                    "description": "Test input values"
+                  },
+                  "expected": {
+                    "type": "string",
+                    "description": "Expected plan result"
+                  },
+                  "result": {
+                    "type": "string",
+                    "description": "Actual Thai message result"
+                  },
+                  "error": {
+                    "type": "string",
+                    "description": "Error message if test failed"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
