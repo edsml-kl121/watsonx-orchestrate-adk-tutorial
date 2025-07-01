@@ -12,7 +12,7 @@ load_dotenv(dotenv_path=env_path)
 try:
     # Load and validate environment variables
 
-    # vector_index for HR Thai leave policies make sure it exists in the same project_id
+    #  make sure vector_index exists in the same project_id
     vector_index_id = os.getenv("WATSONX_VECTOR_INDEX_ID")
     # Replace with your actual project ID and credentials
     project_id = os.getenv("WATSONX_PROJECT_ID")
@@ -83,7 +83,7 @@ def get_diabetes_diet_rag(user_query: str = None) -> str:
 
         return proximity_search(user_query)
     except Exception as e:
-        return RuntimeError(f"Failed to retrieve HR policy content: {e}")
+        return RuntimeError(f"Failed to retrieve diabetes diet content: {e}")
         
 
 
@@ -93,7 +93,7 @@ def get_diabetes_diet_rag(user_query: str = None) -> str:
     try:
         # Change the query below to test different topics
         test_query = "leave types"
-        result = get_my_policies_rag(test_query)
+        result = get_diabetes_diet_rag(test_query)
         print("Query:", test_query)
         print("Result:", result)
     except Exception as e:
