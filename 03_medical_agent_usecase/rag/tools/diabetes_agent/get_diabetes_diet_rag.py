@@ -62,20 +62,20 @@ def proximity_search(query: str) -> str:
         raise RuntimeError(f"Error during RAG proximity search: {e}")
 
 @tool
-def get_my_policies_rag(user_query: str = None) -> str:
+def get_diabetes_diet_rag(user_query: str = None) -> str:
     """
-    Retrieves relevant HR policy content from a vector index using a Retrieval-Augmented Generation (RAG) search.
+    Retrieves relevant diabetes information and dietary guidance from a vector index using a Retrieval-Augmented Generation (RAG) search.
 
-    This tool accepts a refined, focused query about a specific HR topic—such as types of leave, entitlements, 
-    or request procedures—and returns matching policy content from the company’s HR documentation.
+    This tool accepts a refined, focused query about a specific diabetes topic—such as symptoms, dietary recommendations, 
+    foods to avoid, meal planning, or the food exchange system—and returns matching content from the diabetes knowledge base.
 
-    The returned content is intended to serve as unformatted grounding for the agent’s language model. 
+    The returned content is intended to serve as unformatted grounding for the agent's language model. 
     Final response formatting, summarization, or markdown rendering is handled downstream by the agent.
 
-    :param user_query: A concise HR-related topic interpreted by the agent 
-    (e.g., "parental leave", "unpaid leave", "leave types", "leave frequency", "maternity policy", "sick leave eligibility").
+    :param user_query: A concise diabetes-related topic interpreted by the agent 
+    (e.g., "diabetes symptoms", "foods to avoid", "meal planning", "food exchange system", "dietary recommendations", "carbohydrate counting").
 
-    :returns: A plain-text string containing one or more relevant policy excerpts. These may include bullet points, guidelines, eligibility rules, or approval steps. The output is not formatted or curated, and is intended solely as contextual input for the LLM agent.
+    :returns:
     """
     try:
         if not user_query:
