@@ -4,7 +4,6 @@ from ibm_watsonx_orchestrate.agent_builder.tools import tool
 from ibm_watsonx_ai.foundation_models.utils import Toolkit
 from ibm_watsonx_ai import APIClient, Credentials
 
-
 # Get absolute path to `.env` in the same directory as this script
 env_path = os.path.join(os.path.dirname(__file__), ".env")
 load_dotenv(dotenv_path=env_path)
@@ -73,13 +72,13 @@ def get_diabetes_diet_rag(user_query: str = None) -> str:
     Final response formatting, summarization, or markdown rendering is handled downstream by the agent.
 
     :param user_query: A concise diabetes-related topic interpreted by the agent 
-    (e.g., "diabetes symptoms", "foods to avoid", "meal planning", "food exchange system", "dietary recommendations", "carbohydrate counting").
+    (e.g., "diabetes symptoms", "foods to avoid", "foods to eat", "food exchange system", "meal planning", "daily meal examples", "rice and carbohydrates", "fruits for diabetics").
 
-    :returns:
+    :returns: A plain-text string containing relevant diabetes guidance
     """
     try:
         if not user_query:
-            return "Please provide a specific policy topic, e.g., 'maternity leave' or 'unpaid leave'."
+            return "Please provide a specific policy topic, e.g., 'diabetes symptoms' or 'foods to avoid'."
 
         return proximity_search(user_query)
     except Exception as e:
@@ -92,7 +91,7 @@ def get_diabetes_diet_rag(user_query: str = None) -> str:
 """if __name__ == "__main__":
     try:
         # Change the query below to test different topics
-        test_query = "leave types"
+        test_query = "diabetes symptoms"
         result = get_diabetes_diet_rag(test_query)
         print("Query:", test_query)
         print("Result:", result)
