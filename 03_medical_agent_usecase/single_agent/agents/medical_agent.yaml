@@ -1,7 +1,7 @@
 spec_version: v1
 style: default
-name: hospital_appointment_agent_mew_test
-llm: watsonx/meta-llama/llama-3-3-70b-instruct
+name: group_2_hospital_appointment_agent
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
 description: >
   This assistant is designed to support hospital staff and healthcare systems in managing patient appointments efficiently.
   It helps users search, filter, and review historical and upcoming appointment records, as well as respond to inquiries
