@@ -3,12 +3,9 @@ from ibm_watsonx_orchestrate.agent_builder.tools import tool
 @tool
 def get_appointment_history() -> str:
     """
-    Retrieve detailed information about hospital appointment history relevant to patients.
+    Retrieve all hospital appointment history. This tool receives no input/argument and returns all records
 
-    This includes past and upcoming appointment records, appointment types, status, pending reasons,
-    estimated medical costs, and patient identifiers such as National ID and email.
-
-    :returns: A string containing one or more appointment records in plain text or markdown-friendly format.
+    :returns: A string containing all appointment records in plain text or markdown-friendly format.
     """
     try:
         appointment_data = """\

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -x
 
-orchestrate env activate test-env
+orchestrate env activate ibm-env
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 for python_tool in hr_agent/get_my_policies.py; do
