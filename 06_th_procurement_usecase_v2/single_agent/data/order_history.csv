@@ -1,0 +1,21 @@
+﻿Order ID,Supplier ID,Supplier Name,Date,Product ID,Product Name,Product Type,Quantity,Unit Price (THB),Total Price (THB),Status
+ORD-TH100,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,1/7/2024,P016,Michelin Pilot Sport 4,ยางรถยนต์,100,4200,420000,Delivered
+ORD-TH101,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,2/5/2024,P001,Michelin XM2,ยางรถยนต์,200,3500,700000,Delivered
+ORD-TH102,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,1/23/2024,P016,Michelin Pilot Sport 4,ยางรถยนต์,500,4200,2100000,Delivered
+ORD-TH103,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,1/24/2024,P001,Michelin XM2,ยางรถยนต์,100,3500,350000,Delivered
+ORD-TH104,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,1/7/2024,P016,Michelin Pilot Sport 4,ยางรถยนต์,500,4200,2100000,Delivered
+ORD-TH105,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,4/17/2024,P016,Michelin Pilot Sport 4,ยางรถยนต์,500,4200,2100000,Delivered
+ORD-TH106,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,1/2/2024,P016,Michelin Pilot Sport 4,ยางรถยนต์,300,4200,1260000,Pending
+ORD-TH107,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,3/28/2024,P001,Michelin XM2,ยางรถยนต์,400,3500,1400000,Delivered
+ORD-TH108,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,1/27/2024,P001,Michelin XM2,ยางรถยนต์,300,3500,1050000,Delivered
+ORD-TH109,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,3/29/2024,P001,Michelin XM2,ยางรถยนต์,300,3500,1050000,Delivered
+ORD-TH110,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,5/17/2024,P001,Michelin XM2,ยางรถยนต์,400,3500,1400000,Delivered
+ORD-TH111,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,5/21/2024,P015,Michelin Primacy 4,ยางรถยนต์,100,4000,400000,Delivered
+ORD-TH112,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,4/2/2024,P016,Michelin Pilot Sport 4,ยางรถยนต์,500,4200,2100000,Delivered
+ORD-TH113,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,1/12/2024,P016,Michelin Pilot Sport 4,ยางรถยนต์,100,4200,420000,Delivered
+ORD-TH114,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,2/29/2024,P015,Michelin Primacy 4,ยางรถยนต์,100,4000,400000,Pending
+ORD-TH115,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,4/26/2024,P015,Michelin Primacy 4,ยางรถยนต์,300,4000,1200000,Delivered
+ORD-TH116,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,4/4/2024,P015,Michelin Primacy 4,ยางรถยนต์,200,4000,800000,Delivered
+ORD-TH117,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,6/28/2024,P016,Michelin Pilot Sport 4,ยางรถยนต์,300,4200,1260000,In Transit
+ORD-TH118,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,6/4/2024,P016,Michelin Pilot Sport 4,ยางรถยนต์,100,4200,420000,Delivered
+ORD-TH119,SUP-001,บริษัท พรีเมียมออโต้พาร์ทจำกัด,2/11/2024,P016,Michelin Pilot Sport 4,ยางรถยนต์,200,4200,840000,Delivered

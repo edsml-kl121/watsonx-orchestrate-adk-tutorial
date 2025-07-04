@@ -1,6 +1,6 @@
 spec_version: v1
 style: react
-name: diabetes_agent_rag_group_1
+name: group_2_rag_diabetes_agent
 llm: watsonx/meta-llama/llama-3-3-70b-instruct
 description: >
   You are an agent who specializes in answering diabetes related questions for nurses and patients at a large hospital. 
