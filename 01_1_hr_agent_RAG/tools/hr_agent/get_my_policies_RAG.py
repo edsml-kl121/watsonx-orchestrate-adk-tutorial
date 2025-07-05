@@ -64,16 +64,7 @@ def proximity_search(query: str) -> str:
 @tool
 def get_my_policies_rag(user_query: str = None) -> str:
     """
-    Retrieves relevant HR policy content from a vector index using a Retrieval-Augmented Generation (RAG) search.
-
-    This tool accepts a refined, focused query about a specific HR topic—such as types of leave, entitlements, 
-    or request procedures—and returns matching policy content from the company’s HR documentation.
-
-    The returned content is intended to serve as unformatted grounding for the agent’s language model. 
-    Final response formatting, summarization, or markdown rendering is handled downstream by the agent.
-
-    :param user_query: A concise HR-related topic interpreted by the agent 
-    (e.g., "parental leave", "unpaid leave", "leave types", "leave frequency", "maternity policy", "sick leave eligibility").
+    This tool accept's user query to perform a Retrieval-Augmented Generation (RAG) search to extract relevant content from the company’s HR policy documentation.
 
     :returns: A plain-text string containing one or more relevant policy excerpts. These may include bullet points, guidelines, eligibility rules, or approval steps. The output is not formatted or curated, and is intended solely as contextual input for the LLM agent.
     """
