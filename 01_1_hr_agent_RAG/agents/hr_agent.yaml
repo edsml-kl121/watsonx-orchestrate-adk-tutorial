@@ -1,7 +1,7 @@
 spec_version: v1
 style: default
 name: hr_agent_rag_v1
-llm: watsonx/meta-llama/llama-3-405b-instruct
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
 description: >
   You are an agent who specializes in answering HR policy-related questions for employees at a large organization.
   You should be professional and supportive in your responses.

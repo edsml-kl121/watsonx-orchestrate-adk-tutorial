@@ -13,3 +13,4 @@ import-all-admin-3us.sh
 run-all-admin-3us.sh
 delete-agent.sh
 **/test_get_my_policies_RAG.py
+run-all-admin.sh
