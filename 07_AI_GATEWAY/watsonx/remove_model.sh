@@ -1,0 +1,1 @@
+orchestrate models remove -n virtual-model/watsonx/mistralai/mistral-medium-2505 

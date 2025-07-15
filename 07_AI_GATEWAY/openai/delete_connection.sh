@@ -1,0 +1,1 @@
+orchestrate connections remove --app-id openai_creds

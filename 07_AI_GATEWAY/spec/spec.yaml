@@ -1,0 +1,10 @@
+spec_version: v1
+kind: model
+name: watsonx/mistralai/mistral-medium-2505
+display_name: mistral medium 2505 #Optional
+description: Mistral medium running on watsonx
+tags: #Optional
+  - mistral
+model_type: chat #Optional Default to "chat"
+provider_config:
+  watsonx_space_id: my_wxai_space_id

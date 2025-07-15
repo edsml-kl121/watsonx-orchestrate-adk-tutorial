@@ -1,0 +1,1 @@
+orchestrate models remove -n virtual-model/openai/gpt-4o

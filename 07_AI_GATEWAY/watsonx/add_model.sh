@@ -1,0 +1,1 @@
+orchestrate models add --name watsonx/mistralai/mistral-medium-2505 --app-id watsonx_ai_creds

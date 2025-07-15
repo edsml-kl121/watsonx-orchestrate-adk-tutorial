@@ -1,0 +1,1 @@
+orchestrate models add --name openai/gpt-4o --app-id openai_creds
