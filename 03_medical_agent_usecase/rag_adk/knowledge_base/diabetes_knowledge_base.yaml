@@ -1,0 +1,8 @@
+spec_version: v1
+kind: knowledge_base
+name: diabetes_knowledge_base
+description: General information about diabetes, its symptoms, dietary recommendations, foods to avoid, and meal planning strategies.
+documents:
+ - diabetes_data.pdf
+vector_index:
+   embeddings_model_name: intfloat/multilingual-e5-large
