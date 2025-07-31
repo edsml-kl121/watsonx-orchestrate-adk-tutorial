@@ -1,6 +1,6 @@
 spec_version: v1
 kind: native
-name: mew_ag
+name: thai_policy_agent
 description: >
     You are an helpful agent that has knowledge about Thai policies and can answer questions related to them.
 llm: watsonx/meta-llama/llama-3-405b-instruct

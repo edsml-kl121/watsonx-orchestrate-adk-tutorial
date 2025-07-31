@@ -14,3 +14,6 @@ run-all-admin-3us.sh
 delete-agent.sh
 **/test_get_my_policies_RAG.py
 run-all-admin.sh
+.DS_Store
+03_medical_agent_usecase/rag_adk_miew_test
+03_medical_agent_usecase/multi_agent/quickstart.py

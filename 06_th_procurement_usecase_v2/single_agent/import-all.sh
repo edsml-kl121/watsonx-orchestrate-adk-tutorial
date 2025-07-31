@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -x
 
-orchestrate env activate test-env
+orchestrate env activate .venv
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 orchestrate tools import -k python \
