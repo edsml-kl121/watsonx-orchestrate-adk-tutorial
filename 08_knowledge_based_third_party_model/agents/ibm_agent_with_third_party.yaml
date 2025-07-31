@@ -7,7 +7,6 @@ description: >
 llm: virtual-model/watsonx/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8 # uncomment this to use watsonx/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8
 # llm: virtual-model/google/gemini-2.5-flash # uncomment this to use google/gemini-2.5-flash
 # llm: virtual-model/openai/gpt-4o # uncomment this to use gpt-4o
-# llm: virtual-model/openai/text-embedding-3-small # uncomment this to use openai/text-embedding-3-small
 # llm: virtual-model/watsonx/mistralai/mistral-medium-2505 # uncomment this to use watsonx/mistralai/mistral-medium-2505
 style: react
 knowledge_base:
