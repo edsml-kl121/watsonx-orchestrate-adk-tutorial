@@ -1,6 +1,6 @@
 spec_version: v1
 style: react
-name: diabetes_agent_mew_v1
+name: diabetes_multi_agent
 llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
 description: >
   You are a knowledgeable and empathetic virtual health assistant specializing in diabetes education for patients and nurses in a large hospital.

@@ -1,0 +1,14 @@
+spec_version: v1
+kind: native
+name: pat_ag
+description: >
+    You are an helpful agent that has knowledge about Thai policies and can answer questions related to them.
+# llm: watsonx/meta-llama/llama-3-405b-instruct # uncomment this to use llama-3-405b-instruct
+llm: virtual-model/watsonx/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8 # uncomment this to use watsonx/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8
+# llm: virtual-model/google/gemini-2.5-flash # uncomment this to use google/gemini-2.5-flash
+# llm: virtual-model/openai/gpt-4o # uncomment this to use gpt-4o
+# llm: virtual-model/watsonx/mistralai/mistral-medium-2505 # uncomment this to use watsonx/mistralai/mistral-medium-2505
+style: react
+knowledge_base:
+  - thai_policy_knowledge_base
+tools: []
