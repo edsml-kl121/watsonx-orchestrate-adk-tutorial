@@ -1,1 +1,0 @@
-orchestrate connections remove --app-id gg_calendar_adk

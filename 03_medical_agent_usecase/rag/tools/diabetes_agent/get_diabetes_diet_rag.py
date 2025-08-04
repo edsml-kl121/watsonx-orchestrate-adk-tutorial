@@ -35,15 +35,13 @@ try:
 except EnvironmentError as e:
     raise RuntimeError(f"Environment variable error: {e}")
 
-
+api_client = APIClient(
+    project_id=project_id,
+    credentials=credentials,
+)
 
 def proximity_search(query: str) -> str:
     try:
-        api_client = APIClient(
-            project_id=project_id,
-            credentials=credentials,
-        )
-
         document_search_tool = Toolkit(api_client).get_tool("RAGQuery")
 
         config = {

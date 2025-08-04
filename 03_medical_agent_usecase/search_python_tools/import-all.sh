@@ -4,7 +4,7 @@ set -x
 orchestrate env activate TZ-37
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-for python_tool in diabetes_agent/get_diabetes_diet_rag.py; do
+for python_tool in diabetes_agent/get_diabetes_info.py; do
   orchestrate tools import -k python \
     -f "${SCRIPT_DIR}/tools/${python_tool}" \
     -p "${SCRIPT_DIR}/tools/diabetes_agent" \

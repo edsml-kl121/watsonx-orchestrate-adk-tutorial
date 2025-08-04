@@ -1,1 +1,0 @@
-orchestrate toolkits remove --name mcp-ggcal-adk
