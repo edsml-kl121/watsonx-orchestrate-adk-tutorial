@@ -1,4 +1,4 @@
-requests>=2.32.4,<3.0.0
+requests
 ibm-watsonx-orchestrate
-ibm-watsonx-ai==1.3.26
-python-dotenv==1.0.1
+ibm-watsonx-ai==1.3.31
+python-dotenv
